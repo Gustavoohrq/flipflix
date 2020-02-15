@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "FlipFlix",
+    "slug": "FlipFlix",
+    "privacy": "public",
+    "sdkVersion": "36.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/logo.png",
+    "splash": {
+      "images": "./assets/images/app.gif",
+      "resizeMode": "contain",
+      "backgroundColor": "#151F28"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
