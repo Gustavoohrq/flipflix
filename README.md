@@ -32,7 +32,7 @@ App desenvolvido para pesquisar filmes. 🎥🔎
 - `yarn start`;
 - Escanear QR Code;
  
-## 🙋‍♂️ Authors
+## 🙋‍♂️ Author
 
 * **Gustavo Henrique** - [Gustavoohrq](https://github.com/Gustavoohrq)
 
