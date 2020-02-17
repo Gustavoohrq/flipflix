@@ -38,4 +38,4 @@ App desenvolvido para pesquisar filmes. 🎥🔎
 
 ## 📜 License
 
-This project is licensed under the GNU GPL V3 - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GNU GPL V3 - see the [LICENSE.md](https://github.com/Gustavoohrq/flipflix/blob/master/LICENCE.MD) file for details
