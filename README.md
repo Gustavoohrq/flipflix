@@ -1,4 +1,3 @@
-# flipflix
 <h1 align="center">
   <strong>💻 FLIPFLIX</strong>
 </h1> 
@@ -32,5 +31,11 @@ App desenvolvido para pesquisar filmes. 🎥🔎
 - `npm install`;
 - `yarn start`;
 - Escanear QR Code;
-
  
+## 🙋‍♂️ Authors
+
+* **Gustavo Henrique** - [Gustavoohrq](https://github.com/Gustavoohrq)
+
+## 📜 License
+
+This project is licensed under the GNU GPL V3 - see the [LICENSE.md](LICENSE.md) file for details
