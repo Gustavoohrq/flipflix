@@ -4,7 +4,7 @@
 
 <p align="center">
 App desenvolvido para pesquisar filmes. 🎥🔎
-  <img src="https://raw.githubusercontent.com/technecloud/pd-chatbot-dashboard/dev/src/assets/telas.jpg?token=ALODRDWAU5BU6OBK33PMDX26JPTA6"/>
+
 </p> 
 
 ## ✅ Funcionalidades
