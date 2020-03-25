@@ -7,7 +7,7 @@ import Card from '../components/card/index'
 export default function HomeScreen() {
     const [movies, setMovies] = useState(['']);
     const [nulll, setNull] = useState(false);
-    var key = '50e1d8ffed136011850ab0daf22650c0';
+    var key = 'SUA_KEY';
     var lg = 'en-US'
     
     async function handleAddMovies(data) {
