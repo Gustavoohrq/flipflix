@@ -4,9 +4,6 @@ import api from '../services/api'
 import Icon from "react-native-vector-icons/FontAwesome";
 
 
-
-import Form from '../components/form/index'
-
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 
@@ -48,7 +45,6 @@ export default function HomeScreen() {
             }
         }).then(response => {
             setMovies(response.data.results)
-
             setTimeout(() => {
                 setLoading(true)
             }, 5000);
