@@ -9,6 +9,8 @@ export default function LoadingScreen({ navigation: { navigate } }) {
     
     useEffect(() => {
         async function loadFont(){
+            console.disableYellowBox = true; 
+
             await Font.loadAsync({
                 bold: require('../assets/fonts/Montserrat-Bold.ttf'),
                 regular: require('../assets/fonts/Montserrat-Regular.ttf'),

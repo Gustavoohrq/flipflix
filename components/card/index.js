@@ -1,43 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, FlatList } from 'react-native'
 import Icon from "react-native-vector-icons/FontAwesome";
 
+import Carousel from 'react-native-snap-carousel';
 
 
 export default function index({ movie }) {
-    const [vincent, setVincent] = useState(false)
-
-    useEffect(() => {
-        if (movie.length !== 0) {
-            setVincent(true)
-        }
-    }, [movie])
+    const [background, setBackground] = useState()
+    
     return (
-        <>
-            {vincent ?
 
-
-                <View style={styles.container}>
-                    <Image
-                        style={styles.image}
-                        source={{ uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}` }}
-                        resizeMode="stretch"
-                    />
-                    <Text style={styles.titleCard}>{movie.title}</Text>
-                    <View style={{ flexDirection: 'row', marginTop: 20 }} >
-                        <Icon name="star" style={styles.iconsStart} />
-                        <Text style={styles.rating}>{movie.vote_average}</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row', marginTop: 20 }} >
-                        <Icon name="calendar" style={styles.iconsCalender} />
-                        <Text style={styles.releaseData}>{movie.release_date}</Text>
-                    </View>
+            <View style={styles.container}>
+                <Image
+                    style={styles.image}
+                    source={{ uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}` }}
+                    resizeMode="stretch"
+                />
+                <Text style={styles.titleCard}>{movie.title}</Text>
+                <View style={{ flexDirection: 'row', marginTop: 20 }} >
+                    <Icon name="star" style={styles.iconsStart} />
+                    <Text style={styles.rating}>{movie.vote_average}</Text>
                 </View>
-                : <Image
-                    style={{ marginTop: 300, position: 'absolute' }}
-                    source={require("../../assets/images/confused.gif")}
-                />}
-        </>
+                <View style={{ flexDirection: 'row', marginTop: 20 }} >
+                    <Icon name="calendar" style={styles.iconsCalender} />
+                    <Text style={styles.releaseData}>{movie.release_date}</Text>
+                </View>
+            </View>
     )
 }
 const styles = StyleSheet.create({
