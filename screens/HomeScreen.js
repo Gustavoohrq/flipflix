@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
-import ReactNative, { View, StyleSheet, ScrollView, StatusBar, Dimensions, Image, Text, FlatList, TouchableOpacity } from 'react-native'
+import ReactNative, { View, StyleSheet, ScrollView, StatusBar, Dimensions, Image, Text, FlatList, TouchableOpacity, TextInput } from 'react-native'
 import api from '../services/api'
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/Feather";
 
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
@@ -10,6 +10,7 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 export default function HomeScreen() {
     const [movies, setMovies] = useState(['']);
     const [loading, setLoading] = useState(false)
+    const [searchText, setSearchText] = useState('')
 
     var key = '50e1d8ffed136011850ab0daf22650c0';
     var lg = 'en-US'
@@ -20,7 +21,6 @@ export default function HomeScreen() {
 
         return (
             <TouchableOpacity style={styles.containerMovie}>
-
                 <Image
                     style={styles.imgFlat}
                     source={{ uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}` }}
@@ -51,20 +51,31 @@ export default function HomeScreen() {
         });
     }, [])
 
-    async function handleAddMovies(data) {
+    async function handleAddMovies() {
+        setLoading(false)
         var response = await api.get(`3/search/movie`, {
             params: {
                 api_key: key,
                 language: lg,
-                query: data,
+                query: searchText,
             }
         })
+        setSearchText('')
         setMovies(response.data.results)
+        setTimeout(() => {
+            setLoading(true)
+        }, 4000);
     }
 
     return (
         <ScrollView style={styles.container}>
             <StatusBar barStyle="light-content" />
+            <View style={styles.searchContainer}>
+                <TextInput style={styles.inputSearch} placeholder='Search for a movie...' placeholderTextColor="#566068" value={searchText} onChangeText={e => setSearchText(e )}/>
+                <TouchableOpacity onPress={handleAddMovies} style={styles.searchIcon}>
+                    <Icon name='search' color='#566068' size={20} />
+                </TouchableOpacity>
+            </View>
             <View style={{ flex: 1, height: screenHeight, }}>
                 <View style={styles.moviesContainer}>
                     {loading ?
@@ -100,14 +111,28 @@ const styles = StyleSheet.create({
         fontSize: 55,
         fontFamily: "alfa",
     },
-    form: {
-        flex: 1,
+    searchContainer: {
+        position: 'relative',
+        backgroundColor: '#29313A',
+        borderRadius: 8,
+        justifyContent: 'center',
+        marginTop: 50,
+        marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 30,
     },
+    inputSearch: {
+        color: '#566068',
+        fontFamily: 'regular',
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 20,
+        paddingBottom: 20,
 
-    moviesContainer: {
-
-        marginTop: 150,
-
+    },
+    searchIcon: {
+        position: 'absolute',
+        right: 16
     },
     imgFlat: {
         alignSelf: "center",
