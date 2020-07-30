@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { ActivityIndicator, View, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 import * as Font from 'expo-font'
 
 
 
 export default function LoadingScreen({ navigation: { navigate } }) {
 
-    
+
     useEffect(() => {
-        async function loadFont(){
-            console.disableYellowBox = true; 
+        async function loadFont() {
+            console.disableYellowBox = true;
 
             await Font.loadAsync({
                 bold: require('../assets/fonts/Montserrat-Bold.ttf'),
@@ -25,7 +25,7 @@ export default function LoadingScreen({ navigation: { navigate } }) {
 
     return (
         <View style={styles.container}>
-            <ActivityIndicator size="large"/>
+            <Image style={{ width: 150, height: 150 }} source={{ uri: 'https://thumbs.gfycat.com/GleamingMildLarva-max-1mb.gif' }} />
         </View>
     )
 }

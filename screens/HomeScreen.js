@@ -11,11 +11,20 @@ export default function HomeScreen() {
     const [movies, setMovies] = useState(['']);
     const [loading, setLoading] = useState(false)
     const [searchText, setSearchText] = useState('')
+    const [categories, setCategories] = useState([''])
+    const [selectedCategory, setSelectedCategory] = useState(28);
+
+
 
     var key = '50e1d8ffed136011850ab0daf22650c0';
     var lg = 'en-US'
 
-    const _renderItem = ({ item, index }) => {
+    const changeCategory = (category) => {
+        setSelectedCategory(category)
+        // gamesRef.current.scrollToOffset({ x: 0, y: 0 });
+    };
+
+    const _renderItemMovie = ({ item, index }) => {
         var d = new Date(item.release_date);
         const release_date = d.getFullYear()
 
@@ -37,6 +46,28 @@ export default function HomeScreen() {
             </TouchableOpacity>
         );
     }
+
+    const _renderItemCategory = ({ item, index }) => {
+        return (
+            <>
+                {selectedCategory === item.id ?
+
+                    <TouchableOpacity style={styles.categoryActive} onPress={() => changeCategory(item.id)}>
+                        <Text style={styles.categoryNameActive}>{item.name}</Text>
+                    </TouchableOpacity>
+
+                    :
+
+                    <TouchableOpacity style={styles.category} onPress={() => changeCategory(item.id)}>
+                        <Text style={styles.categoryName}>{item.name}</Text>
+                    </TouchableOpacity>
+                }
+
+
+
+            </>
+        )
+    }
     useEffect(() => {
         api.get(`3/movie/popular`, {
             params: {
@@ -45,10 +76,21 @@ export default function HomeScreen() {
             }
         }).then(response => {
             setMovies(response.data.results)
-            setTimeout(() => {
-                setLoading(true)
-            }, 5000);
         });
+
+        api.get(`3/genre/movie/list`, {
+            params: {
+                api_key: key,
+                language: lg,
+            }
+        }).then(response => {
+            setCategories(response.data.genres)
+        });
+
+        setTimeout(() => {
+            setLoading(true)
+        }, 5000);
+
     }, [])
 
     async function handleAddMovies() {
@@ -61,6 +103,7 @@ export default function HomeScreen() {
             }
         })
         setSearchText('')
+        setSelectedCategory(28)
         setMovies(response.data.results)
         setTimeout(() => {
             setLoading(true)
@@ -71,19 +114,30 @@ export default function HomeScreen() {
         <ScrollView style={styles.container}>
             <StatusBar barStyle="light-content" />
             <View style={styles.searchContainer}>
-                <TextInput style={styles.inputSearch} placeholder='Search for a movie...' placeholderTextColor="#566068" value={searchText} onChangeText={e => setSearchText(e )}/>
+                <TextInput style={styles.inputSearch} placeholder='Search for a movie...' placeholderTextColor="#566068" value={searchText} onChangeText={e => setSearchText(e)} />
                 <TouchableOpacity onPress={handleAddMovies} style={styles.searchIcon}>
                     <Icon name='search' color='#566068' size={20} />
                 </TouchableOpacity>
             </View>
+
+            <FlatList
+                horizontal
+                data={categories}
+                renderItem={_renderItemCategory}
+                keyExtractor={(item, index) => index}
+                showsHorizontalScrollIndicator={false}
+            />
             <View style={{ flex: 1, height: screenHeight, }}>
                 <View style={styles.moviesContainer}>
                     {loading ?
                         <FlatList
                             horizontal
-                            data={movies}
-                            renderItem={_renderItem}
+                            data={movies.filter(movie => {
+                                return movie.genre_ids.includes(selectedCategory) || selectedCategory === 28;
+                            })}
+                            renderItem={_renderItemMovie}
                             keyExtractor={(item, index) => index}
+                            showsHorizontalScrollIndicator={false}
 
                         />
                         :
@@ -103,13 +157,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#1A1E21'
 
-    },
-    title: {
-        marginLeft: 55,
-        marginTop: 70,
-        color: "rgba(195,130,195,1)",
-        fontSize: 55,
-        fontFamily: "alfa",
     },
     searchContainer: {
         position: 'relative',
@@ -170,5 +217,35 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         margin: 10,
         width: 250,
-    }
+    },
+    category: {
+        alignItems: 'center',
+        marginHorizontal: 16,
+        borderColor: '#566068',
+        borderWidth: 1,
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+        marginBottom: 10,
+        borderRadius: 8,
+    },
+    categoryName: {
+        color: '#566068',
+        fontFamily: 'bold'
+    },
+
+    categoryActive: {
+        alignItems: 'center',
+        marginHorizontal: 16,
+        borderColor: '#819ee5',
+        borderWidth: 2,
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+        marginBottom: 10,
+        borderRadius: 8,
+    },
+    categoryNameActive: {
+        color: '#819ee5',
+        fontFamily: 'bold'
+    },
+
 })
