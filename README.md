@@ -6,7 +6,7 @@
     <img src="https://github.com/Gustavoohrq/flipflix/blob/master/assets/images/home.jpg" width="200" height="350" />
 </p> 
 
-## 📱 Screens
+## 📱 Paginas
 - Home
 
 ## 🧰 Ferramentas
