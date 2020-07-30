@@ -1,10 +1,9 @@
 <h1 align="center">
-  <strong>💻 FLIPFLIX</strong>
+  <strong>FLIPFLIX 🎥🔎</strong>
 </h1> 
 
 <p align="center">
-App desenvolvido para pesquisar filmes. 🎥🔎
-
+    <img src="https://github.com/Gustavoohrq/flipflix/blob/master/assets/images/home.jpg" width="200" height="350" />
 </p> 
 
 ## ✅ Funcionalidades
